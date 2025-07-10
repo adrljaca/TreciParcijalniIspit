@@ -1,7 +1,10 @@
 package com.example.EvidencijaPolaznika.controller;
 
+import com.example.EvidencijaPolaznika.dto.UpisDTO;
 import com.example.EvidencijaPolaznika.service.UpisService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,8 +18,8 @@ public class UpisController {
     }
 
     @GetMapping
-    public List<UpisDto> getAllUpisi() {
-        List<UpisDto> upisi = upisService.getAllUpisi();
+    public List<UpisDTO> getAllUpisi() {
+        List<UpisDTO> upisi = upisService.getAllUpisi();
         return upisi;
     }
 }

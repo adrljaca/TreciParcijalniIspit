@@ -2,6 +2,7 @@ package com.example.EvidencijaPolaznika.service;
 
 import com.example.EvidencijaPolaznika.dto.UpisDTO;
 import com.example.EvidencijaPolaznika.repository.SpringDataUpisRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.example.EvidencijaPolaznika.controller;
 
+import com.example.EvidencijaPolaznika.dto.PolaznikDTO;
 import com.example.EvidencijaPolaznika.service.PolaznikService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,28 +20,28 @@ public class PolaznikController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public PolaznikDto save(@RequestBody final PolaznikDto command) {
+    public PolaznikDTO save(@RequestBody final PolaznikDTO command) {
         return polaznikService.save(command)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Greska prilikom " +
                         "dodavanja novog polaznika."));
     }
 
     @GetMapping
-    public List<PolaznikDto> getAllPolaznici() {
-        List<PolaznikDto> polaznici = polaznikService.getAllPolaznik();
+    public List<PolaznikDTO> getAllPolaznici() {
+        List<PolaznikDTO> polaznici = polaznikService.getAllPolaznik();
         return polaznici;
     }
 
     @GetMapping("/{id}")
-    public PolaznikDto getById(@PathVariable("id") Long polaznikId) {
+    public PolaznikDTO getById(@PathVariable("id") Long polaznikId) {
         return polaznikService.findById(polaznikId)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ne postoji polaznik sa ID-om:" + polaznikId));
     }
 
     @PutMapping("/{id}")
-    public PolaznikDto update(@PathVariable("id") Long polaznikId,@RequestBody final PolaznikDto polaznikDto) {
-        return polaznikService.updatePolaznik(polaznikId, polaznikDto)
+    public PolaznikDTO update(@PathVariable("id") Long polaznikId,@RequestBody final PolaznikDTO polaznikDTO) {
+        return polaznikService.updatePolaznik(polaznikId, polaznikDTO)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ne postoji polaznik sa ID-om:" + polaznikId));
     }

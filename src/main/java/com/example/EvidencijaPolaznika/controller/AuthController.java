@@ -1,6 +1,16 @@
 package com.example.EvidencijaPolaznika.controller;
 
+import com.example.EvidencijaPolaznika.domain.RefreshToken;
+import com.example.EvidencijaPolaznika.dto.AuthRequestDTO;
+import com.example.EvidencijaPolaznika.dto.JwtResponseDTO;
+import com.example.EvidencijaPolaznika.dto.RefreshTokenRequestDTO;
+import com.example.EvidencijaPolaznika.service.JwtService;
+import com.example.EvidencijaPolaznika.service.RefreshTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
