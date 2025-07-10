@@ -1,55 +1,53 @@
 package com.example.EvidencijaPolaznika.controller;
 
-import com.example.EvidencijaPolaznika.model.Polaznik;
 import com.example.EvidencijaPolaznika.service.PolaznikService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/polaznici")
+@RequestMapping("/polaznici")
 public class PolaznikController {
 
-    private final PolaznikService service;
+    PolaznikService polaznikService;
 
-    public PolaznikController(PolaznikService service) {
-        this.service = service;
+    public PolaznikController(PolaznikService polaznikService) {
+        this.polaznikService = polaznikService;
     }
 
-    @GetMapping("/all")
-    public List<Polaznik> getAll() {
-        return service.findAll();
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public PolaznikDto save(@RequestBody final PolaznikDto command) {
+        return polaznikService.save(command)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Greska prilikom " +
+                        "dodavanja novog polaznika."));
+    }
+
+    @GetMapping
+    public List<PolaznikDto> getAllPolaznici() {
+        List<PolaznikDto> polaznici = polaznikService.getAllPolaznik();
+        return polaznici;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Polaznik> getById(@PathVariable Long id) {
-        return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public Polaznik create(@RequestBody Polaznik polaznik) {
-        return service.save(polaznik);
+    public PolaznikDto getById(@PathVariable("id") Long polaznikId) {
+        return polaznikService.findById(polaznikId)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ne postoji polaznik sa ID-om:" + polaznikId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Polaznik> update(@PathVariable Long id, @RequestBody Polaznik polaznik) {
-        return service.findById(id)
-                .map(existing -> {
-                    polaznik.setId(id);
-                    return ResponseEntity.ok(service.save(polaznik));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public PolaznikDto update(@PathVariable("id") Long polaznikId,@RequestBody final PolaznikDto polaznikDto) {
+        return polaznikService.updatePolaznik(polaznikId, polaznikDto)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ne postoji polaznik sa ID-om:" + polaznikId));
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (service.findById(id).isPresent()) {
-            service.delete(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    public void delete(@PathVariable("id") Long polaznikId) {
+        polaznikService.deletePolaznik(polaznikId);
     }
 }

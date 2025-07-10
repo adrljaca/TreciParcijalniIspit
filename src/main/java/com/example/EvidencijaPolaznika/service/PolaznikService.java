@@ -1,34 +1,18 @@
 package com.example.EvidencijaPolaznika.service;
 
-import com.example.EvidencijaPolaznika.model.Polaznik;
-import com.example.EvidencijaPolaznika.repository.PolaznikRepository;
-import org.springframework.stereotype.Service;
+import com.example.EvidencijaPolaznika.dto.PolaznikDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class PolaznikService {
+public interface PolaznikService {
+    Optional<PolaznikDTO> save(PolaznikDTO polaznikDTO);
 
-    private final PolaznikRepository polaznikRepository;
+    List<PolaznikDTO> getAllPolaznik();
 
-    public PolaznikService(PolaznikRepository polaznikRepository) {
-        this.polaznikRepository = polaznikRepository;
-    }
+    Optional<PolaznikDTO> findById(Long polaznikID);
 
-    public List<Polaznik> findAll() {
-        return polaznikRepository.findAll();
-    }
+    Optional<PolaznikDTO> updatePolaznik(Long polaznikId, PolaznikDTO polaznikDTO);
 
-    public Optional<Polaznik> findById(Long id) {
-        return polaznikRepository.findById(id);
-    }
-
-    public Polaznik save(Polaznik polaznik) {
-        return polaznikRepository.save(polaznik);
-    }
-
-    public void delete(Long id) {
-        polaznikRepository.deleteById(id);
-    }
+    void deletePolaznik(Long polaznikId);
 }
