@@ -1,8 +1,6 @@
 package com.example.EvidencijaPolaznika.controller;
 
-import com.example.EvidencijaPolaznika.model.Upis;
 import com.example.EvidencijaPolaznika.service.UpisService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

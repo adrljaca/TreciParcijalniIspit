@@ -5,6 +5,7 @@ import com.example.EvidencijaPolaznika.dto.PolaznikDTO;
 import com.example.EvidencijaPolaznika.mapper.PolaznikMapper;
 import com.example.EvidencijaPolaznika.mapper.PolaznikMapperImpl;
 import com.example.EvidencijaPolaznika.repository.SpringDataPolaznikRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.example.EvidencijaPolaznika.domain;
 
-import com.example.EvidencijaPolaznika.model.Upis;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

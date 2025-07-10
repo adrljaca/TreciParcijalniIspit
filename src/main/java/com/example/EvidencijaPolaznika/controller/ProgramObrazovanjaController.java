@@ -1,8 +1,6 @@
 package com.example.EvidencijaPolaznika.controller;
 
-import com.example.EvidencijaPolaznika.model.ProgramObrazovanja;
 import com.example.EvidencijaPolaznika.service.ProgramObrazovanjaService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

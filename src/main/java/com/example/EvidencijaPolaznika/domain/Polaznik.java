@@ -1,6 +1,5 @@
 package com.example.EvidencijaPolaznika.domain;
 
-import com.example.EvidencijaPolaznika.model.Upis;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Polaznik {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long polaznikId;
@@ -22,6 +20,16 @@ public class Polaznik {
     private String ime;
 
     private String prezime;
+
+    private String programNaziv;
+
+    public String getProgramNaziv() {
+        return programNaziv;
+    }
+
+    public void setProgramNaziv(String programNaziv) {
+        this.programNaziv = programNaziv;
+    }
 
     @OneToMany(mappedBy = "polaznik", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Upis> upisSet = new HashSet<>();
